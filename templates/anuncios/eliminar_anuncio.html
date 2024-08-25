@@ -1,0 +1,79 @@
+{% include "baseadmin.html" %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: rgb(121,76,65);
+        background: linear-gradient(91deg, rgba(121,76,65,1) 38%, rgba(133,87,75,1) 61%, rgba(82,52,43,1) 100%);
+        color: #c4aeae;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    :root {
+        --primary-color: #ecebe8; 
+        --secondary-color: #8d6748; 
+        --accent-color: #4d4339; 
+        --text-color: #c2b9b9;
+        --button-confirm-color: #5a2d18; 
+        --button-confirm-hover-color: #8a1a16;
+        --link-color: #5e2106; 
+        --link-hover-color: #4e220d; 
+        --text-color-dark: #dbcccc; 
+    }
+
+    h1 {
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+    }
+
+    p {
+        text-align: center;
+        color: var(--text-color-dark);
+        margin-bottom: 20px;
+    }
+
+    form {
+        text-align: center;
+    }
+
+    form button {
+        background-color: var(--button-confirm-color);
+        border: none;
+        border-radius: 4px;
+        color: var(--text-color);
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    form button:hover {
+        background-color: var(--button-confirm-hover-color);
+    }
+
+    a {
+        display: inline-block;
+        margin-top: 20px;
+        color: var(--link-color);
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: var(--link-hover-color);
+        text-decoration: underline;
+    }
+</style>
+
+<h1>Eliminar Anuncio</h1>
+<p>¿Estás seguro de que quieres eliminar el anuncio "{{ anuncio.titulo }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sí, eliminar</button>
+</form>
+<a href="{% url 'detalle_anuncio' anuncio.pk %}">Cancelar</a>
+{% endblock content %}

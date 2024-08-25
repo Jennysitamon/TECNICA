@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container" style="padding: 60px; max-width: 1600px; margin: 0 auto; background: rgb(79,28,15); background: linear-gradient(91deg, rgba(79,28,15,1) 1%, rgba(118,77,65,1) 21%, rgba(130,92,81,1) 58%, rgba(79,28,15,1) 100%);">
+    <div class="conteiner-form" style="max-width: 380px; margin: auto; padding: 30px; border-radius: 10px; box-shadow: 0 6px 12px rgba(48, 30, 30, 0.349); background-color: #d1bfaf;">
+      <h3 class="txt_gris_medio" style="text-align: center; color: #2c1717; font-size: 26px; margin-bottom: 20px;">Iniciar sesión</h3>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <i class="bi bi-exclamation-triangle" style="font-size: 20px; color: #75100c; vertical-align: middle; margin-right: 10px;"></i>
+        <span style="font-size: 14px; color: #70312f;">Este perfil es exclusivo para administradores.</span>
+      </div>
+      <hr />
+      
+      <div class="login-container" style="padding: 20px;">
+        {% if form.errors %}
+        <div class="alert alert-danger" style="margin-bottom: 15px; padding: 15px; border-radius: 2px; background-color: #5e320ab7; color: #ece1db;">
+          <p>Tu usuario y contraseña están incorrectos</p>
+        </div>
+        {% endif %}
+        <form id="form-login" method="post" action="" style="display: flex; flex-direction: column;">
+          {% csrf_token %}
+          <div class="w450" id="username" style="margin-bottom: 20px;">
+            <input type="text" name="username" placeholder="Usuario" style="width: 100%; border: none; border-bottom: 2px solid #333; padding: 10px; box-sizing: border-box; background: transparent; outline: none;">
+          </div>
+          <div class="w450" id="password" style="margin-bottom: 20px; position: relative;">
+            <input type="password" name="password" id="password-input" placeholder="Contraseña" style="width: 100%; border: none; border-bottom: 2px solid #333; padding: 10px; box-sizing: border-box; background: transparent; outline: none;">
+            <i id="toggle-password" class="bi bi-eye" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer; color: #333;"></i>
+          </div>
+          <button id="btn-registrar" class="button_large" style="padding: 12px 25px; font-size: 18px; color: #cfd4d2ee; background-color: #3f0f03e7; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.2s ease;">
+            Entrar
+          </button>
+          <div class="clarfix" style="clear: both;"></div>
+        </form>
+        <a href="#" class="txt_verde txt_center mt15 mb20" style="display: block; text-align: center; color: #a03535; text-decoration: none; margin-top: 20px; font-size: 16px;">¿Olvidaste tu contraseña?</a>
+      </div>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const passwordInput = document.getElementById('password-input');
+      const togglePassword = document.getElementById('toggle-password');
+      
+      togglePassword.addEventListener('click', function() {
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          togglePassword.classList.remove('bi-eye');
+          togglePassword.classList.add('bi-eye-slash');
+        } else {
+          passwordInput.type = 'password';
+          togglePassword.classList.remove('bi-eye-slash');
+          togglePassword.classList.add('bi-eye');
+        }
+      });
+    });
+  </script>
+{% endblock %}

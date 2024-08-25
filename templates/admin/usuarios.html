@@ -1,0 +1,138 @@
+{% include "baseadmin.html" %}
+{% load static %}
+{% block content %}
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: rgb(121,76,65);
+        background: linear-gradient(91deg, rgba(121,76,65,1) 38%, rgba(133,87,75,1) 61%, rgba(82,52,43,1) 100%);
+        color: #c4aeae;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        color: #e4d8d8;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(112, 13, 13, 0.5);
+    }
+    
+    table {
+        width: 70%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: rgba(65, 6, 6, 0.6);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 12px;
+        border: 1px solid rgba(255, 243, 243, 0.507);
+    }
+
+    th {
+        background-color: rgb(66, 32, 23);
+        color: #d4caca;
+        font-size: 1.1em;
+    }
+
+    td {
+        background-color: rgba(121, 73, 43, 0.5);
+        color: #bdb8b8;
+    }
+
+    tr:nth-child(even) td {
+        background-color: rgba(145, 64, 17, 0.4);
+    }
+
+    .btn-small {
+        background-color: rgb(92, 55, 46);
+        color: #c5c0c0;
+        border: none;
+        padding: 8px 16px;
+        font-size: 0.9em;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.3s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 5px;
+        text-decoration: none; 
+    }
+
+    .btn-small:hover {
+        background-color: rgba(130, 92, 81, 1);
+        transform: scale(1.05);
+    }
+
+    .btn-large {
+        background-color: rgba(79, 28, 15, 1);
+        color: #e4e2e2;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.3s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none; 
+    }
+
+    .btn-large:hover {
+        background-color: rgba(130, 92, 81, 1);
+        transform: scale(1.05);
+    }
+
+    button[type="submit"] i {
+        margin-right: 8px;
+    }
+
+    form {
+        display: inline;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <h1>Lista de Usuarios</h1>
+  <a href="{% url 'create_user' %}" class="btn-small">
+    <i class="fas fa-user-plus"></i> Crear usuario
+  </a>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre de Usuario</th>
+        <th>Email</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <a href="{% url 'edit_user' user.id %}" class="btn-small">
+              <i class="fas fa-edit"></i> Editar
+            </a>
+            <form action="{% url 'delete_user' user.id %}" method="post" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn-small">
+                <i class="fas fa-trash"></i> Borrar
+              </button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% include 'baseadmin.html' %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: rgb(121,76,65);
+        background: linear-gradient(91deg, rgba(121,76,65,1) 38%, rgba(133,87,75,1) 61%, rgba(82,52,43,1) 100%);
+        color: #c4aeae;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    :root {
+        --primary-color: #6f4f28; 
+        --secondary-color: #8d6748; 
+        --accent-color: #d1b89f; 
+        --text-color: #c0b8b8;
+        --input-border-color: #a89f91; 
+    }
+
+    form {
+        max-width: 400px; 
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid var(--primary-color);
+        border-radius: 8px;
+        background-color: var(--accent-color);
+    }
+
+    form h1 {
+        margin-bottom: 20px;
+        color: var(--primary-color);
+        text-align: center; 
+    }
+
+    form label {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--primary-color);
+    }
+
+    form input {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        border: none; 
+        border-bottom: 2px solid var(--input-border-color); 
+        background-color: transparent; 
+        font-size: 16px;
+        color: var(--primary-color);
+        box-shadow: none;
+    }
+
+    form input::placeholder {
+        color: var(--input-border-color);
+    }
+
+    form button {
+        width: auto;
+        padding: 8px 16px;
+        background-color: var(--primary-color);
+        border: none;
+        border-radius: 4px;
+        color: var(--text-color);
+        font-size: 14px;
+        cursor: pointer;
+        margin-top: 10px; 
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    form button:hover {
+        background-color: var(--secondary-color);
+    }
+
+    form a {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    form a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<form method="post">
+    <h1>Crear Usuario</h1>
+    {% csrf_token %}
+    <label for="username">Nombre de Usuario:</label>
+    <input type="text" id="username" name="username">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password">
+    <button type="submit">Aceptar</button>
+    <a href="{% url 'Usuarios' %}">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% include 'base.html' %}
+{% load static %}
+{% block content %}
+  <style>
+    body {
+      background: rgb(94,47,34);
+      background: linear-gradient(91deg, rgba(94,47,34,1) 2%, rgba(79,28,15,1) 28%, rgba(82,41,31,1) 60%, rgba(87,38,25,1) 78%, rgba(82,52,43,1) 100%);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .event-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+        animation: slideIn 1s ease-out;
+    }
+
+    .event-item {
+        background-color: #96654567;
+        border: 1px solid #361b1bd7;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 200%;
+        max-width: 350px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        height: 300px;
+        transition: transform 0.3s;
+        animation: slideIn 1s ease-out;
+    }
+
+    .event-item:hover {
+        transform: scale(1.05);
+    }
+
+    .event-title {
+        font-size: 1.2em;
+        margin: 0;
+        flex-shrink: 0;
+        color: #af9494; 
+        text-align: center;
+    }
+
+    .event-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        margin-top: 10px;
+        flex-shrink: 0;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 2.3em;
+        color: rgb(218, 203, 203);
+        animation: slideIn 1s ease-out;
+    }
+  </style>
+
+  <h1>Anuncios importantes</h1>
+  <div class="event-list">
+    {% for anuncio in anuncios %}
+      <div class="event-item">
+        <h2 class="event-title">{{ anuncio.titulo }}</h2>
+        <img src="{{ anuncio.imagen_url }}" alt="{{ anuncio.titulo }}" class="event-image" />
+        <p class="event-description">{{ anuncio.descripcion }}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% include 'footer.html' %}
+{% endblock %}

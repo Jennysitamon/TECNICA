@@ -1,0 +1,80 @@
+{% include "baseadmin.html" %}
+{% load static %}
+{% block content %}
+<style>
+    :root {
+        --primary-color: #6f4f28; 
+        --secondary-color: #8d6748; 
+        --accent-color: #d1b89f; 
+        --text-color: #d6d3d3; 
+        --input-border-color: #a89f91; 
+        --cancel-button-color: #d9534f; 
+        --cancel-button-hover-color: #c9302c; 
+        --confirm-button-color: #97475b;
+        --confirm-button-hover-color: #d56531; 
+    }
+
+    .confirmation-container {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid var(--primary-color);
+        border-radius: 8px;
+        background-color: var(--accent-color);
+        text-align: center;
+    }
+
+    .confirmation-container h1 {
+        margin-bottom: 20px;
+        color: var(--primary-color);
+    }
+
+    .confirmation-container p {
+        margin-bottom: 10px;
+        color: var(--primary-color);
+        font-size: 16px;
+    }
+
+    .confirmation-container button {
+        width: auto; 
+        padding: 8px 16px;
+        background-color: var(--confirm-button-color);
+        border: none;
+        border-radius: 4px;
+        color: var(--text-color);
+        font-size: 14px;
+        cursor: pointer;
+        margin-top: 10px; 
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .confirmation-container button:hover {
+        background-color: var(--confirm-button-hover-color);
+    }
+
+    .confirmation-container a {
+        display: block;
+        margin-top: 20px;
+        color: var(--cancel-button-color);
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .confirmation-container a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="confirmation-container">
+    <h1>¿Estás seguro que deseas eliminar este usuario?</h1>
+    <p>Nombre de Usuario: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar Eliminación</button>
+    </form>
+    <a href="{% url 'Usuarios' %}">Cancelar</a>
+</div>
+{% endblock %}

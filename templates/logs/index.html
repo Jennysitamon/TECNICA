@@ -1,0 +1,21 @@
+{% include 'base.html' %}
+{% load static %}
+{% block content %}
+  <div class="contenido" style="background-image: url('/static/img/FONDITO.png'); background-size: cover; background-position: center;">
+    <h2>C O N T A M O S C O N M Á S D E 3 5 A Ñ O S D E</h2>
+    <p>E X P E R I E N C I A</p>
+    <button class="btn btn-primary btn-lg btn-sm video-btn" id="videoButton"><i class="fas fa-video"></i> Ver Video</button>
+    <div class="video-container" id="videoContainer">
+      <button class="btn-close" id="closeVideoButton">&times;</button>
+      <video class="video" controls>
+        <source src="{% static 'video/tecnica26.mp4' %}" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/video.js' %}"></script>
+  <script src="{% static 'js/face.js' %}"></script>
+{% endblock %}

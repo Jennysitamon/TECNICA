@@ -1,0 +1,93 @@
+{% include "baseadmin.html" %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: rgb(121,76,65);
+        background: linear-gradient(91deg, rgba(121,76,65,1) 38%, rgba(133,87,75,1) 61%, rgba(82,52,43,1) 100%);
+        color: #c4aeae;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    :root {
+        --primary-color: #8d6748; 
+        --secondary-color: #582e0c; 
+        --accent-color: #d1b89f; 
+        --text-color: #81580c; 
+        --button-color: #4b2003; 
+        --button-hover-color: #331c07; 
+        --link-color: #2b0604; 
+        --link-hover-color: #682320;
+        --input-border-color: #a89f91; 
+        --form-background: #c5ae9b; 
+        --form-border-color: #d6c5c5; 
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; 
+        justify-content: center; 
+    }
+
+    li {
+        background-color: var(--form-background);
+        border: 1px solid var(--form-border-color);
+        border-radius: 8px;
+        padding: 20px;
+        width: 200px; 
+        box-shadow: 0 4px 8px rgba(85, 8, 8, 0.185);
+        text-align: center;
+    }
+
+    li img {
+        max-width: 100%;
+        height: auto; 
+        border-radius: 4px;
+    }
+
+    li a {
+        display: block;
+        color: var(--primary-color);
+        text-decoration: none;
+        margin: 10px 0;
+        font-weight: bold;
+    }
+
+    li a:hover {
+        color: var(--secondary-color);
+        text-decoration: underline;
+    }
+
+    .nuevo-anuncio {
+        display: block;
+        text-align: center;
+        color: var(--button-color);
+        text-decoration: none;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .nuevo-anuncio:hover {
+        color: var(--button-hover-color);
+        text-decoration: underline;
+    }
+</style>
+
+<h1>Lista de Anuncios</h1>
+<a class="nuevo-anuncio" href="{% url 'nuevo_anuncio' %}">Nuevo Anuncio</a>
+<ul>
+    {% for anuncio in anuncios %}
+        <li>
+            <a href="{% url 'detalle_anuncio' anuncio.pk %}">{{ anuncio.titulo }}</a>
+            <a href="{% url 'editar_anuncio' anuncio.pk %}">Editar</a>
+            <a href="{% url 'eliminar_anuncio' anuncio.pk %}">Eliminar</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
